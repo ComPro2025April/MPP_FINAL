@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Main {
     public static void main(String[] args) {
@@ -23,22 +24,41 @@ public class Main {
                 Map.entry("Detox Green Smoothie","16")
         );
 
+        //1st and second
         System.out.println();
         beverageSugarMao.entrySet().stream()
                 .filter(e->Optional.ofNullable(parse(parse(e.getValue()))).isPresent())
                 .forEach(e -> System.out.println(e.getKey() + " " + e.getValue()));
 
+        //filter
         System.out.println(" ");
         beverageSugarMao.entrySet().stream()
                 .filter(e->e.getKey().toLowerCase().contains("Juice".toLowerCase()) || e.getKey().toLowerCase().contains("Smoothie".toLowerCase()))
                 .forEach(e -> System.out.println(e.getKey() + " " + e.getValue()));
 
 
+        //30 gram
+        System.out.println(" ");
+        System.out.println("Filter 30 grams");
+        beverageSugarMao.entrySet().stream()
+                .filter(e-> {
+                    try{
+                        return Integer.parseInt(e.getValue()) < 30;
+                    } catch (NumberFormatException ex){
+                        return false;
+                    }
+                })
+                .forEach(e->System.out.println(e.getKey() + " " + e.getValue()));
+
+
+
+        // sort
         System.out.println(" ");
         beverageSugarMao.entrySet().stream()
-                .sorted(Comparator.comparing(Map.Entry::getValue))
-                        .forEach(e -> System.out.println(e.getKey() + " " + e.getValue()));
+                .sorted(Comparator.comparing(Map.Entry::getValue).thenComparing(Map.Entry::getKey))
+                .forEach(e -> System.out.println(e.getKey() + " " + e.getValue()));
 
+        //print
         System.out.println(" ");
         beverageSugarMao.entrySet().stream()
                 .forEach(e->System.out.println(e.getKey() + ": " + e.getValue()));
