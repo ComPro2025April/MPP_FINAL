@@ -1,4 +1,4 @@
-package art2.q3;
+package Part2.q3;
 
 public class Main {
     public static void main(String[] args) {
