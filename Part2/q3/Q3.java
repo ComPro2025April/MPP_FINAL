@@ -1,6 +1,6 @@
 package Part2.q3;
 
-public class Main {
+public class Q3 {
     public static void main(String[] args) {
         BillingProcessor processor = new BillingProcessor() {
             @Override
